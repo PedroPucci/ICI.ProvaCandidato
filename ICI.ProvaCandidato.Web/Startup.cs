@@ -38,6 +38,9 @@ namespace ICI.ProvaCandidato.Web
 
 			services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
 			services.AddScoped<IRepositoryUoW, RepositoryUoW>();
+
+			//services.AddTransient<IRepositoryUoW, RepositoryUoW>();
+			//services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
