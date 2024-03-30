@@ -26,28 +26,28 @@ namespace ICI.ProvaCandidato.Web.Controllers
             return Ok(result);
         }
 
-        //[HttpPut]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesDefaultResponseType]
-        //public async Task<IActionResult> UpdateTag([FromBody] TagEntity tagEntity)
-        //{
-        //    try
-        //    {
-        //        TagEntity newTagEntity = await _serviceUoW.TagService.UpdateTag(tagEntity);
-        //        return Ok(new
-        //        {
-        //            mensagem = $"Tag registration updated successfully."
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new
-        //        {
-        //            mensagem = "An error occurred while updating the tag! " + ex + ""
-        //        });
-        //    }
-        //}
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> UpdateTag([FromBody] TagEntity tagEntity)
+        {
+            try
+            {
+                TagEntity newTagEntity = await _serviceUoW.TagService.UpdateTag(tagEntity);
+                return Ok(new
+                {
+                    mensagem = $"Tag registration updated successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "An error occurred while updating the tag! " + ex + ""
+                });
+            }
+        }
 
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TagEntity>))]

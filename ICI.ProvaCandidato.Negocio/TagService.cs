@@ -107,41 +107,31 @@ namespace ICI.ProvaCandidato.Negocio
             }
         }
 
-        public Task<TagEntity> UpdateTag(TagEntity tagEntity)
+        public async Task<TagEntity> UpdateTag(TagEntity tagEntity)
         {
-            throw new NotImplementedException();
-        }
+            TagEntity tagByDescription = _repositoryUoW.TagRepository.GetTagById(tagEntity.Id);
 
-        //public async Task<TagEntity> UpdateTag(TagEntity tagEntity)
-        //{
-        //    using var transaction = _repositoryUoW.BeginTransaction();
-        //    try
-        //    {   
-        //        int id = tagEntity.Id;
-        //        string description = tagEntity.Description;
+            if (tagByDescription == null)
+                throw new InvalidOperationException("Tag does not found!");
 
-        //        TagEntity newTagEntity = await _repositoryUoW.TagRepository.GetTagByIdAsync(description);
-
-        //        if (newTagEntity == null)
-        //            throw new InvalidOperationException("Collaborator does not found!");
-
-        //        newTagEntity.Description = tagEntity.Description;
-
-        //        var result = _repositoryUoW.TagRepository.UpdateTag(newTagEntity);
-
-        //        await _repositoryUoW.SaveAsync();
-        //        await transaction.CommitAsync();
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction.Rollback();
-        //        throw new InvalidOperationException("Unexpected error " + ex + "!");
-        //    }
-        //    finally
-        //    {
-        //        transaction.Dispose();
-        //    }
-        //}        
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                tagByDescription.Description = tagEntity.Description;
+                var result = _repositoryUoW.TagRepository.UpdateTag(tagByDescription);
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
+        }       
     }
 }
