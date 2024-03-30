@@ -6,6 +6,7 @@ namespace ICI.ProvaCandidato.Dados.Repository.Interfaces
     public interface IRepositoryUoW
     {
         IUserRepository UserRepository { get; }
+        ITagRepository TagRepository { get; }
 
         Task SaveAsync();
         void Commit();

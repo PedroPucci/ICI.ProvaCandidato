@@ -19,12 +19,12 @@ namespace ICI.ProvaCandidato.Web.Controllers
             _serviceUoW = unitOfWorkService;
         }
 
-        //[HttpPost("add")]
-        //public async Task<IActionResult> AddTag([FromBody] TagEntity tagEntity)
-        //{
-        //    var result = await _serviceUoW.TagService.AddTag(tagDto);
-        //    return Ok(result);
-        //}
+        [HttpPost("add")]
+        public async Task<IActionResult> AddTag([FromBody] TagEntity tagEntity)
+        {
+            var result = await _serviceUoW.TagService.AddTag(tagEntity);
+            return Ok(result);
+        }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -34,7 +34,7 @@ namespace ICI.ProvaCandidato.Web.Controllers
         {
             try
             {
-                //UserEntity? userEntity = await _serviceUoW.UserService.UpdateUser(userDto);
+                TagEntity newTagEntity = await _serviceUoW.TagService.UpdateTag(tagEntity);
                 return Ok(new
                 {
                     mensagem = $"Tag registration updated successfully."
@@ -56,9 +56,8 @@ namespace ICI.ProvaCandidato.Web.Controllers
         {
             try
             {
-                //var userEntities = await _serviceUoW.UserService.GetAllUsers();
-                //return Ok(userEntities);
-                return Ok();
+                var tagEntities = await _serviceUoW.TagService.GetAllTags();
+                return Ok(tagEntities);
             }
             catch (Exception ex)
             {
@@ -68,5 +67,7 @@ namespace ICI.ProvaCandidato.Web.Controllers
                 });
             }
         }
+
+        //faltando o exclusao e pesquisar por descricao
     }
 }

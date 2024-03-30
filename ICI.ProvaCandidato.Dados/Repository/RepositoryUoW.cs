@@ -9,6 +9,7 @@ namespace ICI.ProvaCandidato.Dados.Repository
         private readonly DataBaseContext _context;
         private bool _disposed = false;
         private IUserRepository? _userRepository = null;
+        private ITagRepository? _tagRepository = null;
 
         public RepositoryUoW(DataBaseContext context)
         {
@@ -24,6 +25,18 @@ namespace ICI.ProvaCandidato.Dados.Repository
                     _userRepository = new UserRepository(_context);
                 }
                 return _userRepository;
+            }
+        }
+
+        public ITagRepository TagRepository
+        {
+            get
+            {
+                if (_tagRepository == null)
+                {
+                    _tagRepository = new TagRepository(_context);
+                }
+                return _tagRepository;
             }
         }
 

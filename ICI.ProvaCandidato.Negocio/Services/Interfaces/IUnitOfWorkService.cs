@@ -3,5 +3,6 @@
     public interface IUnitOfWorkService
     {
         UserService UserService { get; }
+        TagService TagService { get; }
     }
 }
