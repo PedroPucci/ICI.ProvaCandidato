@@ -9,6 +9,7 @@ namespace ICI.ProvaCandidato.Negocio.Services
         private UserService userService;
         private TagService tagService;
         private NoticeService noticeService;
+        private NoticeTagService noticeTagService;
 
         public UnitOfWorkService(IRepositoryUoW repositoryUoW)
         {
@@ -48,6 +49,18 @@ namespace ICI.ProvaCandidato.Negocio.Services
                     noticeService = new NoticeService(_repositoryUoW);
                 }
                 return noticeService;
+            }
+        }
+
+        public NoticeTagService NoticeTagService
+        {
+            get
+            {
+                if (noticeTagService == null)
+                {
+                    noticeTagService = new NoticeTagService(_repositoryUoW);
+                }
+                return noticeTagService;
             }
         }
     }

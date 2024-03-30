@@ -5,5 +5,6 @@
         UserService UserService { get; }
         TagService TagService { get; }
         NoticeService NoticeService { get; }
+        NoticeTagService NoticeTagService { get; }
     }
 }
