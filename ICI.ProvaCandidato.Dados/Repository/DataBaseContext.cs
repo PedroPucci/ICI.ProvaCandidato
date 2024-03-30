@@ -17,13 +17,15 @@ namespace ICI.ProvaCandidato.Dados
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("WebApiDatabase");
+                //optionsBuilder.UseNpgsql("WebApiDatabase");
+                optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
             }
         }
 
+
         public DbSet<UserEntity> UserModel { get; set; }
-        //public DbSet<TagEntity> TagEntity { get; set; }
-        //public DbSet<NoticeEntity> NoticeEntity { get; set; }
-        //public DbSet<NoticeTagEntity> NoticeTagEntity { get; set; }
+        public DbSet<TagEntity> TagEntity { get; set; }
+        public DbSet<NoticeEntity> NoticeEntity { get; set; }
+        public DbSet<NoticeTagEntity> NoticeTagEntity { get; set; }
     }
 }
