@@ -1,6 +1,6 @@
 ﻿namespace ICI.ProvaCandidato.Web.Models
 {
-    public class TagModel : BaseModel
+    public class TagEntity : BaseEntity
     {
         public string Description { get; set; }
     }

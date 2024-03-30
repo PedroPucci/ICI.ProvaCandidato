@@ -1,9 +1,9 @@
 ﻿namespace ICI.ProvaCandidato.Web.Models
 {
-    public class BaseModel
+    public class BaseEntity
     {
         public int Id { get; private set; }
 
-        protected BaseModel() { }
+        protected BaseEntity() { }
     }
 }

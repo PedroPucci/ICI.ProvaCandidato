@@ -6,6 +6,6 @@ namespace ICI.ProvaCandidato.Negocio.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserModel> AddUser(UserModelDto userModelDto);
+        Task<UserEntity> AddUser(UserModelDto userModelDto);
     }
 }

@@ -5,6 +5,6 @@ namespace ICI.ProvaCandidato.Dados.Repository.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserModel> AddUserAsync(UserModel userModel);
+        Task<UserEntity> AddUserAsync(UserEntity userModel);
     }
 }

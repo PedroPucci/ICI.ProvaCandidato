@@ -13,7 +13,7 @@ namespace ICI.ProvaCandidato.Dados.Repository
             _context = context;
         }
 
-        public async Task<UserModel> AddUserAsync(UserModel userModel)
+        public async Task<UserEntity> AddUserAsync(UserEntity userModel)
         {
             var result = await _context.UserModel.AddAsync(userModel);
             return result.Entity;

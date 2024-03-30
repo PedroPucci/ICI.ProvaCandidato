@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using ICI.ProvaCandidato.Dados.Repository.Interfaces;
+using ICI.ProvaCandidato.Negocio.Services.Interfaces;
+using ICI.ProvaCandidato.Web.Models;
+using ICI.ProvaCandidato.Web.Models.Dto;
+using System.Threading.Tasks;
 
 namespace ICI.ProvaCandidato.Negocio
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IRepositoryUoW _repositoryUoW;
         private readonly IMapper _mapper;
@@ -19,9 +23,9 @@ namespace ICI.ProvaCandidato.Negocio
             _repositoryUoW = repositoryUoW;
         }
 
-        //public async Task<GenericResult<UserEntity>> AddUser(UserDto userDto)
-        //{
-        //    throw
-        //}
+        public Task<UserEntity> AddUser(UserModelDto userModelDto)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

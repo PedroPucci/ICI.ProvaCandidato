@@ -21,6 +21,6 @@ namespace ICI.ProvaCandidato.Dados
             }
         }
 
-        public DbSet<UserModel> UserModel { get; set; }
+        public DbSet<UserEntity> UserModel { get; set; }
     }
 }

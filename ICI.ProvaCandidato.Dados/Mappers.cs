@@ -12,8 +12,8 @@ namespace ICI.ProvaCandidato.Dados
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<UserModel, UserModelDto>();
-                cfg.CreateMap<UserModelDto, UserModel>();
+                cfg.CreateMap<UserEntity, UserModelDto>();
+                cfg.CreateMap<UserModelDto, UserEntity>();
             });
         }
     }
