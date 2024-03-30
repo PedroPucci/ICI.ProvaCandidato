@@ -58,6 +58,29 @@ namespace ICI.ProvaCandidato.Negocio
             }
         }
 
+        public TagEntity GetTagByDescription(string description)
+        {
+            if (String.IsNullOrEmpty(description))
+                throw new InvalidOperationException("Description is null or Empty!");
+
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                TagEntity tagEntity = _repositoryUoW.TagRepository.GetTagByDescription(description);
+                _repositoryUoW.Commit();
+                return tagEntity;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
+        }
+
         public async Task<TagEntity> DeleteTag(int id)
         {
             TagEntity tagByDescription = _repositoryUoW.TagRepository.GetTagById(id);
