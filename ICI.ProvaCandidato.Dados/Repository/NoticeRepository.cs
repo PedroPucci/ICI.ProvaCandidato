@@ -42,5 +42,16 @@ namespace ICI.ProvaCandidato.Dados.Repository
         {
             return _context.NoticeEntity.FirstOrDefault(notice => notice.Id == id);
         }
+
+        public async Task<NoticeEntity> DeleteNoticeAsync(NoticeEntity noticeToDelete)
+        {
+            if (noticeToDelete != null)
+            {
+                _context.NoticeEntity.Remove(noticeToDelete);
+                await _context.SaveChangesAsync();
+            }
+
+            return noticeToDelete;
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace ICI.ProvaCandidato.Dados.Repository.Interfaces
         Task<List<NoticeEntity>> GetAllNoticesAsync();
         NoticeEntity UpdateNotice(NoticeEntity noticeEntity);
         NoticeEntity GetNoticeById(int id);
+        Task<NoticeEntity> DeleteNoticeAsync(NoticeEntity noticeToDelete);
     }
 }

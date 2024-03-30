@@ -87,5 +87,31 @@ namespace ICI.ProvaCandidato.Negocio
                 transaction.Dispose();
             }
         }
+        public async Task<NoticeEntity> DeleteNotice(int id)
+        {
+            NoticeEntity noticeById = _repositoryUoW.NoticeRepository.GetNoticeById(id);
+
+            if (noticeById == null)
+                throw new InvalidOperationException("Notice does not found!");
+
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                var result = await _repositoryUoW.NoticeRepository.DeleteNoticeAsync(noticeById);
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
+        }
+
     }
 }

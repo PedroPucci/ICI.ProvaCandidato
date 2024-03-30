@@ -67,5 +67,28 @@ namespace ICI.ProvaCandidato.Web.Controllers
                 });
             }
         }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> DeleteNotice(int id)
+        {
+            try
+            {
+                NoticeEntity noticeEntity = await _serviceUoW.NoticeService.DeleteNotice(id);
+                return Ok(new
+                {
+                    mensagem = $"Notice deleted completed successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "There was an error deleting the Notice! " + ex + ""
+                });
+            }
+        }
     }
 }
