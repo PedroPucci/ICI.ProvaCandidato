@@ -31,6 +31,7 @@ namespace ICI.ProvaCandidato.Dados.Repository
         {
             return await _context.UserModel.OrderBy(user => user.Name).Select(user => new UserEntity
             {
+                Id = user.Id,
                 Name = user.Name,
                 Mail = user.Mail
             }).ToListAsync();

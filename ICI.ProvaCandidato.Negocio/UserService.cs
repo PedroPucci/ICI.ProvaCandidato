@@ -67,10 +67,11 @@ namespace ICI.ProvaCandidato.Negocio
 
                 UserEntity userByName = await _repositoryUoW.UserRepository.GetUserByNameAsync(userName);
 
-                if (userName == null)
+                if (userByName == null)
                     throw new InvalidOperationException("User does not found!");
 
                 userByName.Password = userEntity.Password;
+                userByName.Mail = userEntity.Mail;
 
                 var result = _repositoryUoW.UserRepository.UpdateUser(userByName);
 
