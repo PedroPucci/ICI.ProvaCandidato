@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="5.0.2" />
+    <PackageReference Include="EntityFramework" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ICI.ProvaCandidato.Dados\ICI.ProvaCandidato.Dados.csproj" />
+    <ProjectReference Include="..\ICI.ProvaCandidato.Web\ICI.ProvaCandidato.Web.csproj" />
+  </ItemGroup>
+
+</Project>
