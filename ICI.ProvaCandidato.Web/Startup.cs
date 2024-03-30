@@ -1,4 +1,8 @@
 using ICI.ProvaCandidato.Dados;
+using ICI.ProvaCandidato.Dados.Repository;
+using ICI.ProvaCandidato.Dados.Repository.Interfaces;
+using ICI.ProvaCandidato.Negocio;
+using ICI.ProvaCandidato.Negocio.Services;
 using ICI.ProvaCandidato.Negocio.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,8 +36,11 @@ namespace ICI.ProvaCandidato.Web
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Teste Pedro Ighor", Version = "v1" });
 			});
 
-            services.AddScoped<IUnitOfWorkService, IUserService>();
-        }
+			services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
+			services.AddScoped<IRepositoryUoW, RepositoryUoW>();
+			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IUserRepository, UserRepository>();
+		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
