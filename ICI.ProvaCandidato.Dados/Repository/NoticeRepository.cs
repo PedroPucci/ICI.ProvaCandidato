@@ -1,5 +1,7 @@
 ﻿using ICI.ProvaCandidato.Dados.Repository.Interfaces;
 using ICI.ProvaCandidato.Web.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ICI.ProvaCandidato.Dados.Repository
@@ -17,6 +19,17 @@ namespace ICI.ProvaCandidato.Dados.Repository
         {
             var result = await _context.NoticeEntity.AddAsync(noticeEntity);
             return result.Entity;
+        }
+
+        public async Task<List<NoticeEntity>> GetAllNoticesAsync()
+        {
+            return _context.NoticeEntity.OrderBy(notice => notice.Id).Select(notice => new NoticeEntity
+            {
+                Id = notice.Id,
+                Text = notice.Text,
+                Title = notice.Title,
+                UserModel = notice.UserModel                
+            }).ToList();
         }
     }
 }

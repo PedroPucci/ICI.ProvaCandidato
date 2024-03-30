@@ -1,6 +1,9 @@
 ﻿using ICI.ProvaCandidato.Negocio.Services.Interfaces;
 using ICI.ProvaCandidato.Web.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ICI.ProvaCandidato.Web.Controllers
@@ -21,6 +24,25 @@ namespace ICI.ProvaCandidato.Web.Controllers
         {
             var result = await _serviceUoW.NoticeService.AddNotice(noticeEntity);
             return Ok(result);
+        }
+
+        [HttpGet("all")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<NoticeEntity>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllNotices()
+        {
+            try
+            {
+                var tagEntities = await _serviceUoW.NoticeService.GetAllNotices();
+                return Ok(tagEntities);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "There was an error loading notices! " + ex + ""
+                });
+            }
         }
     }
 }

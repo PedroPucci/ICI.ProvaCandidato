@@ -2,6 +2,7 @@
 using ICI.ProvaCandidato.Negocio.Services.Interfaces;
 using ICI.ProvaCandidato.Web.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ICI.ProvaCandidato.Negocio
@@ -25,6 +26,26 @@ namespace ICI.ProvaCandidato.Negocio
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
                 return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
+        }
+
+        public async Task<List<NoticeEntity>> GetAllNotices()
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<NoticeEntity> notices = await _repositoryUoW.NoticeRepository.GetAllNoticesAsync();
+                _repositoryUoW.Commit();
+                return notices;
             }
             catch (Exception ex)
             {
