@@ -4,5 +4,6 @@
     {
         UserService UserService { get; }
         TagService TagService { get; }
+        NoticeService NoticeService { get; }
     }
 }

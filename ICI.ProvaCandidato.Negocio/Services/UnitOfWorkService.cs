@@ -8,6 +8,7 @@ namespace ICI.ProvaCandidato.Negocio.Services
         private readonly IRepositoryUoW _repositoryUoW;
         private UserService userService;
         private TagService tagService;
+        private NoticeService noticeService;
 
         public UnitOfWorkService(IRepositoryUoW repositoryUoW)
         {
@@ -35,6 +36,18 @@ namespace ICI.ProvaCandidato.Negocio.Services
                     tagService = new TagService(_repositoryUoW);
                 }
                 return tagService;
+            }
+        }
+
+        public NoticeService NoticeService
+        {
+            get
+            {
+                if (noticeService == null)
+                {
+                    noticeService = new NoticeService(_repositoryUoW);
+                }
+                return noticeService;
             }
         }
     }
