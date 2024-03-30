@@ -3,6 +3,7 @@ using ICI.ProvaCandidato.Dados.Repository.Interfaces;
 using ICI.ProvaCandidato.Negocio.Services.Interfaces;
 using ICI.ProvaCandidato.Web.Models;
 using ICI.ProvaCandidato.Web.Models.Dto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ICI.ProvaCandidato.Negocio
@@ -18,12 +19,17 @@ namespace ICI.ProvaCandidato.Negocio
             _mapper = mapper;
         }
 
-        public UserService(IRepositoryUoW repositoryUoW)
+        public async Task<UserEntity> AddUser(UserModelDto userDto)
         {
-            _repositoryUoW = repositoryUoW;
+            throw new System.NotImplementedException();
         }
 
-        public Task<UserEntity> AddUser(UserModelDto userModelDto)
+        public Task<List<UserEntity>> GetAllUsers()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<UserEntity> UpdateUser(UserModelDto userModelDto)
         {
             throw new System.NotImplementedException();
         }

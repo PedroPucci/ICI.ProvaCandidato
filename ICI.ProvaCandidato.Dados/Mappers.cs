@@ -4,7 +4,7 @@ using ICI.ProvaCandidato.Web.Models.Dto;
 
 namespace ICI.ProvaCandidato.Dados
 {
-    class Mappers : Profile
+    public class Mappers : Profile
     {
         public Mappers() { }
 
