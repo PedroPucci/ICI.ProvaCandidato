@@ -10,5 +10,6 @@ namespace ICI.ProvaCandidato.Negocio.Services.Interfaces
         Task<TagEntity> UpdateTag(TagEntity tagEntity);
         Task<List<TagEntity>> GetAllTags();
         Task<TagEntity> DeleteTag(int id);
+        TagEntity GetTagByDescription(string description);
     }
 }

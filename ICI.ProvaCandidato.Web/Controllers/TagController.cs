@@ -68,6 +68,25 @@ namespace ICI.ProvaCandidato.Web.Controllers
             }
         }
 
+        [HttpGet("SearchByDescription")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TagEntity>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetTagByDescription(string description)
+        {
+            try
+            {
+                var tagEntities = _serviceUoW.TagService.GetTagByDescription(description);
+                return Ok(tagEntities);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "There was an error loading tags! " + ex + ""
+                });
+            }
+        }
+
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,7 +109,5 @@ namespace ICI.ProvaCandidato.Web.Controllers
                 });
             }
         }
-
-        //pesquisar por descricao
     }
 }

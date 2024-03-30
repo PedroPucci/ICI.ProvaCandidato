@@ -31,15 +31,20 @@ namespace ICI.ProvaCandidato.Dados.Repository
             }).ToList();
         }
 
+        public TagEntity GetTagById(int id)
+        {
+            return _context.TagEntity.FirstOrDefault(tag => tag.Id == id);
+        }
+
+        public TagEntity GetTagByDescription(string description)
+        {
+            return _context.TagEntity.FirstOrDefault(tag => tag.Description == description);
+        }
+
         public TagEntity UpdateTag(TagEntity tagEntity)
         {
             var response = _context.TagEntity.Update(tagEntity);
             return response.Entity;
-        }
-
-        public TagEntity GetTagById(int id)
-        {
-            return _context.TagEntity.FirstOrDefault(tag => tag.Id == id);
         }
 
         public async Task<TagEntity> DeleteTagAsync(TagEntity tagToDelete)
