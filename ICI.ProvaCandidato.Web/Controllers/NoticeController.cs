@@ -44,5 +44,28 @@ namespace ICI.ProvaCandidato.Web.Controllers
                 });
             }
         }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> UpdateNotice([FromBody] NoticeEntity noticeEntity)
+        {
+            try
+            {
+                NoticeEntity newNoticeEntity = await _serviceUoW.NoticeService.UpdateNotice(noticeEntity);
+                return Ok(new
+                {
+                    mensagem = $"Notice registration updated successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "An error occurred while updating the Notice! " + ex + ""
+                });
+            }
+        }
     }
 }

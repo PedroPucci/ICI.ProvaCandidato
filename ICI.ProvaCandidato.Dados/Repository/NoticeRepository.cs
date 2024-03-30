@@ -31,5 +31,16 @@ namespace ICI.ProvaCandidato.Dados.Repository
                 UserModel = notice.UserModel                
             }).ToList();
         }
+
+        public NoticeEntity UpdateNotice(NoticeEntity noticeEntity)
+        {
+            var response = _context.NoticeEntity.Update(noticeEntity);
+            return response.Entity;
+        }
+
+        public NoticeEntity GetNoticeById(int id)
+        {
+            return _context.NoticeEntity.FirstOrDefault(notice => notice.Id == id);
+        }
     }
 }

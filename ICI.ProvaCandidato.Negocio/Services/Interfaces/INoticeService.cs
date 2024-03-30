@@ -8,5 +8,6 @@ namespace ICI.ProvaCandidato.Negocio.Services.Interfaces
     {
         Task<NoticeEntity> AddNotice(NoticeEntity noticeEntity);
         Task<List<NoticeEntity>> GetAllNotices();
+        Task<NoticeEntity> UpdateNotice(NoticeEntity noticeEntity);
     }
 }
