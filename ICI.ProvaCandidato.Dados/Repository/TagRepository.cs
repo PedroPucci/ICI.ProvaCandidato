@@ -24,10 +24,11 @@ namespace ICI.ProvaCandidato.Dados.Repository
 
         public async Task<List<TagEntity>> GetAllTagsAsync()
         {
-            return await _context.TagEntity.OrderBy(tag => tag.Description).Select(tag => new TagEntity
+            return _context.TagEntity.OrderBy(tag => tag.Description).Select(tag => new TagEntity
             {
+                Id = tag.Id,
                 Description = tag.Description
-            }).ToListAsync();
+            }).ToList();
         }
 
         public TagEntity UpdateTag(TagEntity tagEntity)
@@ -36,15 +37,13 @@ namespace ICI.ProvaCandidato.Dados.Repository
             return response.Entity;
         }
 
-        public async Task<TagEntity> GetTagByDescriptionAsync(string description)
+        public TagEntity GetTagById(int id)
         {
-            return await _context.TagEntity.FirstOrDefaultAsync(tag => tag.Description == description);
+            return _context.TagEntity.FirstOrDefault(tag => tag.Id == id);
         }
 
-        public async Task<TagEntity> DeleteTagAsync(string description)
+        public async Task<TagEntity> DeleteTagAsync(TagEntity tagToDelete)
         {
-            var tagToDelete = await _context.TagEntity.FirstOrDefaultAsync(tag => tag.Description == description);
-
             if (tagToDelete != null)
             {
                 _context.TagEntity.Remove(tagToDelete);
