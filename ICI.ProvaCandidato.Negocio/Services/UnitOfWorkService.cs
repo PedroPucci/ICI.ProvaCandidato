@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ICI.ProvaCandidato.Dados.Repository.Interfaces;
+﻿using ICI.ProvaCandidato.Dados.Repository.Interfaces;
 using ICI.ProvaCandidato.Negocio.Services.Interfaces;
 
 namespace ICI.ProvaCandidato.Negocio.Services
@@ -7,15 +6,11 @@ namespace ICI.ProvaCandidato.Negocio.Services
     public class UnitOfWorkService : IUnitOfWorkService
     {
         private readonly IRepositoryUoW _repositoryUoW;
-        private readonly IMapper _mapper;
-        private readonly IConfiguration _config;
         private UserService? userService;
 
-        public UnitOfWorkService(IRepositoryUoW repositoryUoW, IMapper mapper, IConfiguration config)
+        public UnitOfWorkService(IRepositoryUoW repositoryUoW)
         {
             _repositoryUoW = repositoryUoW;
-            _mapper = mapper;
-            _config = config;
         }
 
         public UserService UserService
@@ -24,7 +19,7 @@ namespace ICI.ProvaCandidato.Negocio.Services
             {
                 if (userService == null)
                 {
-                    userService = new UserService(_repositoryUoW, _mapper);
+                    userService = new UserService(_repositoryUoW);
                 }
                 return userService;
             }

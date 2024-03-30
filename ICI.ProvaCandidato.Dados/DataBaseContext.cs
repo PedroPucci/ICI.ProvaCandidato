@@ -22,5 +22,8 @@ namespace ICI.ProvaCandidato.Dados
         }
 
         public DbSet<UserEntity> UserModel { get; set; }
+        //public DbSet<TagEntity> TagEntity { get; set; }
+        //public DbSet<NoticeEntity> NoticeEntity { get; set; }
+        //public DbSet<NoticeTagEntity> NoticeTagEntity { get; set; }
     }
 }

@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using ICI.ProvaCandidato.Dados.Repository.Interfaces;
+﻿using ICI.ProvaCandidato.Dados.Repository.Interfaces;
 using ICI.ProvaCandidato.Negocio.Services.Interfaces;
 using ICI.ProvaCandidato.Web.Models;
-using ICI.ProvaCandidato.Web.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,20 +10,17 @@ namespace ICI.ProvaCandidato.Negocio
     public class UserService : IUserService
     {
         private readonly IRepositoryUoW _repositoryUoW;
-        private readonly IMapper _mapper;
 
-        public UserService(IRepositoryUoW repositoryUoW,IMapper mapper)
+        public UserService(IRepositoryUoW repositoryUoW)
         {
             _repositoryUoW = repositoryUoW;
-            _mapper = mapper;
         }
 
-        public async Task<UserEntity> AddUser(UserModelDto userDto)
+        public async Task<UserEntity> AddUser(UserEntity userEntity)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                var userEntity = _mapper.Map<UserModelDto, UserEntity>(userDto);
                 var result = await _repositoryUoW.UserRepository.AddUserAsync(userEntity);
 
                 await _repositoryUoW.SaveAsync();
@@ -63,19 +58,19 @@ namespace ICI.ProvaCandidato.Negocio
             }
         }
 
-        public async Task<UserEntity> UpdateUser(UserModelDto userModelDto)
+        public async Task<UserEntity> UpdateUser(UserEntity userEntity)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                var userName = userModelDto.Name;
+                var userName = userEntity.Name;
 
                 UserEntity userByName = await _repositoryUoW.UserRepository.GetUserByNameAsync(userName);
 
                 if (userName == null)
                     throw new InvalidOperationException("User does not found!");
 
-                userByName.Password = userModelDto.Password;
+                userByName.Password = userEntity.Password;
 
                 var result = _repositoryUoW.UserRepository.UpdateUser(userByName);
 
