@@ -68,6 +68,29 @@ namespace ICI.ProvaCandidato.Web.Controllers
             }
         }
 
-        //faltando o exclusao e pesquisar por descricao
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> DeleteTag(string description)
+        {
+            try
+            {
+                TagEntity tagEntity = await _serviceUoW.TagService.DeleteTag(description);
+                return Ok(new
+                {
+                    mensagem = $"Tag deleted completed successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "There was an error deleting the Tag! " + ex + ""
+                });
+            }
+        }
+
+        //pesquisar por descricao
     }
 }

@@ -38,6 +38,29 @@ namespace ICI.ProvaCandidato.Negocio
             }
         }
 
+        public async Task<TagEntity> DeleteTag(string description)
+        {
+            var tag = await _repositoryUoW.TagRepository.GetTagByDescriptionAsync(description);
+
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                var result = await _repositoryUoW.TagRepository.DeleteTagAsync(description);
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
+        }
+
         public async Task<List<TagEntity>> GetAllTags()
         {
             using var transaction = _repositoryUoW.BeginTransaction();

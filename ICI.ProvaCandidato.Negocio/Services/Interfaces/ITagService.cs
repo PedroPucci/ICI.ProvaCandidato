@@ -9,5 +9,6 @@ namespace ICI.ProvaCandidato.Negocio.Services.Interfaces
         Task<TagEntity> AddTag(TagEntity tagEntity);
         Task<TagEntity> UpdateTag(TagEntity tagEntity);
         Task<List<TagEntity>> GetAllTags();
+        Task<TagEntity> DeleteTag(string description);
     }
 }

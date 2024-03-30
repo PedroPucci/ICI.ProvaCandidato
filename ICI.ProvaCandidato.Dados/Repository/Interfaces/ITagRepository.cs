@@ -8,6 +8,8 @@ namespace ICI.ProvaCandidato.Dados.Repository.Interfaces
     {
         Task<TagEntity> AddTagAsync(TagEntity tagEntity);
         TagEntity UpdateTag(TagEntity tagEntity);
-        Task<List<TagEntity>> GetAllTagsAsync();        
+        Task<List<TagEntity>> GetAllTagsAsync();
+        Task<TagEntity> GetTagByDescriptionAsync(string description);
+        Task<TagEntity> DeleteTagAsync(string description);
     }
 }
