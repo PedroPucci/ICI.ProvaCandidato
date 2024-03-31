@@ -5,11 +5,11 @@ namespace ICI.ProvaCandidato.Web.Models
     public class NoticeEntity : BaseEntity
     {
         [Required(ErrorMessage = "O campo Título é obrigatório.")]
-        [StringLength(30, ErrorMessage = "O campo Nome deve ter no máximo 30 caracteres.")]
+        [StringLength(30, MinimumLength = 10, ErrorMessage = "O campo Nome deve ter no máximo 30 caracteres.")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "O campo Texto é obrigatório.")]
-        [StringLength(100, ErrorMessage = "O campo Nome deve ter no máximo 100 caracteres.")]
+        [StringLength(100, MinimumLength = 10, ErrorMessage = "O campo Nome deve ter no máximo 100 caracteres.")]
         public string Text { get; set; }
 
         [Required(ErrorMessage = "O campo Usuário é obrigatório.")]
